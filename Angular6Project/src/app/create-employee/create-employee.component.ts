@@ -26,4 +26,15 @@ export class CreateEmployeeComponent implements OnInit {
   submitCreateEmployeeForm(): void {
     console.log(this.createEmployeeForm.value);
   }
+
+  onLoadData(): void {
+    this.createEmployeeForm.patchValue({
+      fullName: 'Sunil Chandra Karmakar',
+      email: 'sunil_karmakar@ymail.com',
+      skills: {
+        skillName: 'ASP.NET Core',
+        proficiencey: 'intermediate'
+      }
+    })
+  }
 }
