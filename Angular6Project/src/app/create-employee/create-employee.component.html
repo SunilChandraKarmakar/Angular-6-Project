@@ -6,9 +6,17 @@
           Create Employee
         </div>
         <div class="card-body">
-          <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" formControlName="fullName" class="form-control" placeholder="Enter Full Name">
+          <div class="form-group" [ngClass]="{'text-danger' : createEmployeeForm.get('fullName').errors && (createEmployeeForm.get('fullName').touched || createEmployeeForm.get('fullName').dirty)}">
+            <label for="fullName" class="control-label">Full Name</label>
+            <input type="text" id="fullName" formControlName="fullName" class="form-control">
+            <span class="help-block" *ngIf="createEmployeeForm.get('fullName').errors && (createEmployeeForm.get('fullName').touched || createEmployeeForm.get('fullName').dirty)">
+              <span *ngIf="createEmployeeForm.get('fullName').errors.required">
+                Full Name is required.
+              </span>
+              <span *ngIf="createEmployeeForm.get('fullName').errors.minlength || createEmployeeForm.get('fullName').errors.maxlength">
+                Full Name must be greter then 2 character and less then 10 character
+              </span>
+            </span>
           </div>
           <div class="form-group">
             <label for="email">Email address</label>
