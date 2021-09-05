@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class CreateEmployeeComponent implements OnInit {
 
   createEmployeeForm: FormGroup;
+  fullNameLength: number = 0;
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -21,6 +22,14 @@ export class CreateEmployeeComponent implements OnInit {
         proficiencey: ['beginner']
       })
     });
+
+    this.createEmployeeForm.get('fullName')?.valueChanges.subscribe((value: string) => {
+      this.fullNameLength = value.length;
+    })
+
+    this.createEmployeeForm.valueChanges.subscribe((value) => {
+      console.log(value);
+    })
   }
 
   submitCreateEmployeeForm(): void {
