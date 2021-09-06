@@ -36,14 +36,30 @@ export class CreateEmployeeComponent implements OnInit {
     console.log(this.createEmployeeForm.value);
   }
 
-  onLoadData(): void {
-    this.createEmployeeForm.patchValue({
-      fullName: 'Sunil Chandra Karmakar',
-      email: 'sunil_karmakar@ymail.com',
-      skills: {
-        skillName: 'ASP.NET Core',
-        proficiencey: 'intermediate'
+  logKeyValuePairs(formGroup: FormGroup): void {
+    //console.log(Object.keys(formGroup.controls));
+
+    Object.keys(formGroup.controls).forEach((key: string) => {
+      let abstractControl = formGroup.get(key);
+      if(abstractControl instanceof FormGroup) {
+        this.logKeyValuePairs(abstractControl);
       }
-    })
+      else {
+        console.log('Key : ' + key, 'Value : ' + abstractControl?.value);
+      }
+    });
+  }
+
+  onLoadData(): void {
+    // this.createEmployeeForm.patchValue({
+    //   fullName: 'Sunil Chandra Karmakar',
+    //   email: 'sunil_karmakar@ymail.com',
+    //   skills: {
+    //     skillName: 'ASP.NET Core',
+    //     proficiencey: 'intermediate'
+    //   }
+    // })
+
+    this.logKeyValuePairs(this.createEmployeeForm);
   }
 }
